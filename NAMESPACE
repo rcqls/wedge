@@ -1,0 +1,4 @@
+useDynLib(wedge)
+exportPattern("^[^\\.]")
+importFrom("stats", "uniroot")
+importFrom(Rcpp, evalCpp)
