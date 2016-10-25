@@ -1,15 +1,9 @@
 #include <Rcpp.h>
 #include <math.h>
+// [[Rcpp::depends(RcppParallel)]]
+#include <RcppParallel.h>
 using namespace Rcpp;
-
-
-// #----------------------------------------------- compute threshold
-// tau <- uniroot(bb,lower=0.5,upper=1.5)$root
-// bb <- function(x){
-// res <- exp(-8*x*(N-1)^2)/(4*x*(N-1))
-// res <- res-(2/pi)^(3/2)*sqrt(x)/N*exp(2*x)*exp(-pi^2*N^2/(2*x))
-// return(res)
-// }
+using namespace RcppParallel;
 
 // [[Rcpp::export]]
 double wedgeC0(double a1,double b1,double a2,double b2,double tau,int N=3,bool lower_tail=true) {
@@ -29,8 +23,8 @@ double wedgeC0(double a1,double b1,double a2,double b2,double tau,int N=3,bool l
     //----------------------------------------------- vectors of parameters
 
     double a1b1 = a1*b1, a2b2=a2*b2, a1b2 = a1*b2, a2b1 = a2*b1;
-    double ap = (a1+a2)/2.0, am = (a1-a2)/2.0, bp = (b1+b2)/2.0, bm = (b1-b2)/2.0;
-    double abp = ap*bp, abm = am*bm;
+    double ap = (a1+a2)/2.0, bp = (b1+b2)/2.0; // am = (a1-a2)/2.0,bm = (b1-b2)/2.0;
+    double abp = ap*bp; //, abm = am*bm;
     double ga = (a1b1-a2b2)/2.0, de = (a1b2-a2b1)/2.0;
 
 
@@ -81,4 +75,26 @@ NumericVector wedgeC0vect(NumericVector a1,NumericVector b1,NumericVector a2,Num
   NumericVector w(size_vect);
   for(int i=0;i<size_vect;i++) w[i]=wedgeC0(a1[i],b1[i],a2[i],b2[i],tau,N,lower_tail);
   return w;
+}
+
+struct Wedge : public Worker { // foncteur
+ const RVector<double> a1,b1,a2,b2; // source
+ RVector<double> w;   // destination
+ double tau;
+ int N;
+ bool lower_tail;
+ Wedge(const NumericVector input1,const NumericVector input2,const NumericVector input3,const NumericVector input4,
+    NumericVector output, double tau, int N, bool lower_tail) : a1(input1),b1(input2),a2(input3),b2(input4), w(output), tau(tau), N(N), lower_tail(lower_tail) {} // constructeur du foncteur
+ // operation à réaliser sur le chunk [beg,end]
+ void operator()(std::size_t beg, std::size_t end) {
+  for (size_t i=beg; i<end; i++) w[i] = wedgeC0(a1[i],b1[i],a2[i],b2[i],tau,N,lower_tail) ;
+ }
+};
+
+// [[Rcpp::export]]
+NumericVector wedgeC0Par(NumericVector a1,NumericVector b1,NumericVector a2,NumericVector b2,int N,double tau,bool lower_tail,int size_vect) {
+  NumericVector w(size_vect);
+  Wedge foncteur(a1,b1,a2,b2,w,tau,N,lower_tail);
+  parallelFor(0, size_vect, foncteur);
+  return(w) ;
 }

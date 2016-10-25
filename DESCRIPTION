@@ -13,5 +13,5 @@ LazyData: true
 License: GPL
 NeedsCompilation: no
 Packaged: 2016-10-21 11:59:47 UTC; ycart
-Imports: Rcpp (>= 0.12.7)
-LinkingTo: Rcpp
+Imports: Rcpp,RcppParallel
+LinkingTo: Rcpp,RcppParallel
