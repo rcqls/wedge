@@ -1,5 +1,6 @@
 useDynLib(wedge)
-exportPattern("^[^\\.]")
+#exportPattern("^[^\\.]")
+export("wedge","wedgeR")
 importFrom("stats", "uniroot")
 importFrom(Rcpp, evalCpp)
 importFrom(RcppParallel, RcppParallelLibs)
