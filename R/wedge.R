@@ -21,7 +21,7 @@ wedge <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE,type=c("Rcpp","R","Rc
     Par=,Parallel=,RcppPar=,RcppParallel={
       if(missing(nb.threads)) {
         require(parallel)
-        nb.thread <- detectCores()
+        nb.threads <- detectCores()
       }
       RcppParallel::setThreadOptions(numThreads=nb.threads) # To put in some options function
       wedgeRcppParallel(a1,b1,a2,b2,size,tau,N,lower.tail)

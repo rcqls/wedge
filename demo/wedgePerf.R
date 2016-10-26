@@ -1,6 +1,6 @@
 require(wedge)
 
-wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParallel"),seed=10,N=3,nbs.threads=c(4,6,8)) {
+wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParallel","RcppCores"),seed=10,N=3,nbs.threads=c(4,6,8),nbs.cores=c(4,6,8)) {
   set.seed(seed)
   for(nb.exp in nbs.exp) {
     a1 <- 10*runif(nb.exp)^2
@@ -19,12 +19,16 @@ wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParalle
       print(summary(wpRcpp))
     }
 
-    if(FALSE) {# This is in standby since we have to compute more carefully the number of block "b"
+    if("RcppCores" %in% tests) {# This is in standby since we have to compute more carefully the number of block "b"
       require(parallel)
-      for(nb.cores in c(2,5)) {
+      for(nb.cores in nbs.cores) {
         cat("Rcpp",nb.cores,"cores with nb.exp=",nb.exp,"\n")
-        b <- nb.exp/nb.cores
-        print(system.time(wpRcppCore<-unlist(mclapply(1:nb.cores,function(i) wedge(a1[((1:b)+(i-1)*b)->ind],b1[ind],a2[ind],b2[ind],size,tau,type="Rcpp"),mc.cores=nb.cores))))
+        print(system.time({
+          b <- rep(nb.exp %/% nb.cores,nb.cores) + c(rep(1,r <- nb.exp %% nb.cores),rep(0,nb.cores - r))
+          chunksSup <- cumsum(b)
+          chunksInf <- 1 + c(0,chunksSup[-length(chunksSup)])
+          wpRcppCore<-unlist(mclapply(1:nb.cores,function(i) wedge(a1[(chunksInf[i]:chunksSup[i])->ind],b1[ind],a2[ind],b2[ind],size,tau,type="Rcpp"),mc.cores=nb.cores))
+        }))
         print(summary(wpRcppCore))
       }
     }
