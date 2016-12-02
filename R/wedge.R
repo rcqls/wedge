@@ -1,4 +1,4 @@
-wedge <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE,type=c("Rcpp","R","RcppParallel"),nb.threads) {
+wedge <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE,type=c("R","Rcpp","RcppParallel"),nb.threads) {
   #  Computes the wedge probability:
   #         P[-a1*t -b1 < Wt < a2*t +b2, for all t>0]
   #  where Wt is the standard Brownian motion.
@@ -58,16 +58,16 @@ wedgeR <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE) {
   b1r <- b1r[indnn]
   a2r <- a2r[indnn]
   b2r <- b2r[indnn]
+
   a1b1 <- a1r*b1r
   a2b2 <- a2r*b2r
   a1b2 <- a1r*b2r
   a2b1 <- a2r*b1r
+
   ap <- (a1r+a2r)/2
-  ## seems to be unused: am <- (a1r-a2r)/2
   bp <- (b1r+b2r)/2
-  ## seems to be unused: bm <- (b1r-b2r)/2
   abp <- ap*bp
-  ## seems to be unused: abm <- am*bm
+
   ga <- (a1b1-a2b2)/2
   de <- (a1b2-a2b1)/2
   #----------------------------------------------- which sum to use
@@ -78,8 +78,8 @@ wedgeR <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE) {
   a2b2 <- a2b2[ind1]
   a1b2 <- a1b2[ind1]
   a2b1 <- a2b1[ind1]
+
   abp2 <- abp[ind2]                              # for sum2
-  ## seems to be unused: abm2 <- abm[ind2]
   de2 <- de[ind2]
   ga2 <- ga[ind2]
   #----------------------------------------------- initialize
