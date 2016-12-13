@@ -32,7 +32,7 @@ wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParalle
     }
 
     if("RcppParallel" %in% tests) {
-      if("package:RcppParallel" %in% search()) {
+      if("package:wedgeParallel" %in% search()) {
         for(nb.threads in nbs.threads) {
           RcppParallel::setThreadOptions(numThreads=nb.threads)
           cat("RcppParallel",nb.threads,"threads with nb.exp=",nb.exp,"\n")
