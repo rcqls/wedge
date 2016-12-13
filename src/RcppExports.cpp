@@ -2,15 +2,16 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include <Rcpp.h>
+#include <string>
+#include <set>
 
 using namespace Rcpp;
 
 // wedgeRcpp
 NumericVector wedgeRcpp(NumericVector a1, NumericVector b1, NumericVector a2, NumericVector b2, int size_vect, double tau, int N, bool lower_tail);
-RcppExport SEXP wedge_wedgeRcpp(SEXP a1SEXP, SEXP b1SEXP, SEXP a2SEXP, SEXP b2SEXP, SEXP size_vectSEXP, SEXP tauSEXP, SEXP NSEXP, SEXP lower_tailSEXP) {
+static SEXP wedge_wedgeRcpp_try(SEXP a1SEXP, SEXP b1SEXP, SEXP a2SEXP, SEXP b2SEXP, SEXP size_vectSEXP, SEXP tauSEXP, SEXP NSEXP, SEXP lower_tailSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type a1(a1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type b1(b1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type a2(a2SEXP);
@@ -21,23 +22,41 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type lower_tail(lower_tailSEXP);
     rcpp_result_gen = Rcpp::wrap(wedgeRcpp(a1, b1, a2, b2, size_vect, tau, N, lower_tail));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
 }
-// wedgeRcppParallel
-NumericVector wedgeRcppParallel(NumericVector a1, NumericVector b1, NumericVector a2, NumericVector b2, int size_vect, double tau, int N, bool lower_tail);
-RcppExport SEXP wedge_wedgeRcppParallel(SEXP a1SEXP, SEXP b1SEXP, SEXP a2SEXP, SEXP b2SEXP, SEXP size_vectSEXP, SEXP tauSEXP, SEXP NSEXP, SEXP lower_tailSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type a1(a1SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type b1(b1SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type a2(a2SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type b2(b2SEXP);
-    Rcpp::traits::input_parameter< int >::type size_vect(size_vectSEXP);
-    Rcpp::traits::input_parameter< double >::type tau(tauSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< bool >::type lower_tail(lower_tailSEXP);
-    rcpp_result_gen = Rcpp::wrap(wedgeRcppParallel(a1, b1, a2, b2, size_vect, tau, N, lower_tail));
+RcppExport SEXP wedge_wedgeRcpp(SEXP a1SEXP, SEXP b1SEXP, SEXP a2SEXP, SEXP b2SEXP, SEXP size_vectSEXP, SEXP tauSEXP, SEXP NSEXP, SEXP lower_tailSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(wedge_wedgeRcpp_try(a1SEXP, b1SEXP, a2SEXP, b2SEXP, size_vectSEXP, tauSEXP, NSEXP, lower_tailSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
     return rcpp_result_gen;
-END_RCPP
+}
+
+// validate (ensure exported C++ functions exist before calling them)
+static int wedge_RcppExport_validate(const char* sig) { 
+    static std::set<std::string> signatures;
+    if (signatures.empty()) {
+        signatures.insert("NumericVector(*wedgeRcpp)(NumericVector,NumericVector,NumericVector,NumericVector,int,double,int,bool)");
+    }
+    return signatures.find(sig) != signatures.end();
+}
+
+// registerCCallable (register entry points for exported C++ functions)
+RcppExport SEXP wedge_RcppExport_registerCCallable() { 
+    R_RegisterCCallable("wedge", "wedge_wedgeRcpp", (DL_FUNC)wedge_wedgeRcpp_try);
+    R_RegisterCCallable("wedge", "wedge_RcppExport_validate", (DL_FUNC)wedge_RcppExport_validate);
+    return R_NilValue;
 }

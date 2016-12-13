@@ -19,6 +19,7 @@ wedge <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE,type=c("R","Rcpp","Rc
   switch(type,
     Rcpp=wedgeRcpp(a1,b1,a2,b2,size,tau,N,lower.tail),
     Par=,Parallel=,RcppPar=,RcppParallel={
+      if(!("package:RcppParallel" %in% search())) stop("ERROR: you need to install wedgeParallel first.")
       if(missing(nb.threads)) {
         require(parallel)
         nb.threads <- detectCores()

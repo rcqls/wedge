@@ -5,7 +5,7 @@ wedgeRcpp <- function(a1, b1, a2, b2, size_vect, tau, N, lower_tail) {
     .Call('wedge_wedgeRcpp', PACKAGE = 'wedge', a1, b1, a2, b2, size_vect, tau, N, lower_tail)
 }
 
-wedgeRcppParallel <- function(a1, b1, a2, b2, size_vect, tau, N, lower_tail) {
-    .Call('wedge_wedgeRcppParallel', PACKAGE = 'wedge', a1, b1, a2, b2, size_vect, tau, N, lower_tail)
-}
-
+# Register entry points for exported C++ functions
+methods::setLoadAction(function(ns) {
+    .Call('wedge_RcppExport_registerCCallable', PACKAGE = 'wedge')
+})
