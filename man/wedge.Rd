@@ -9,7 +9,7 @@ Computes the probability for a standard Brownian motion to stay in a wedge
 of the plane limited by two straight lines, given by their slopes and intercepts.
 }
 \usage{
-wedge(a1, b1, a2, b2, N = 3, lower.tail = TRUE)
+wedge(a1, b1, a2, b2, N = 3, lower.tail = TRUE, type = c("R","Rcpp","RcppParallel"), nb.threads)
 }
 \arguments{
   \item{a1}{vector of numeric: slopes of lower boundaries
@@ -20,15 +20,19 @@ wedge(a1, b1, a2, b2, N = 3, lower.tail = TRUE)
 }
   \item{b2}{vector of numeric: intercepts of upper boundaries
 }
-  \item{N}{integer: numberof terms to be computed in each series
+  \item{N}{integer: number of terms to be computed in each series
 }
   \item{lower.tail}{logical: if \code{TRUE} the probabilities to stay inside the wedges
 are returned; if \code{FALSE} the exit probabilities are returned.
 }
+  \item{type}{character: type of function to wrap
+}
+  \item{nb.threads}{integer: number of threads
+}
 }
 \details{
-Depending on \code{N} a threshold is computed. If 
-(\code{a1}+\code{a2})*(\code{b1}+\code{b2})/4 is above the threshold, \code{N} 
+Depending on \code{N} a threshold is computed. If
+(\code{a1}+\code{a2})*(\code{b1}+\code{b2})/4 is above the threshold, \code{N}
 terms of Doob's formula are computed. If it is below the threshold, \code{N} terms
 of the theta-function transform are computed.
 }

@@ -1,6 +1,7 @@
 #ifndef wedgeC_H_
 #define wedgeC_H_
 
+// This C function is here because it is also used in the companion wedgeParallel package
 //--------------------------------------------------- Non vectorized version of wedge probability
 double wedgeC(double a1,double b1,double a2,double b2,double tau,int N=3,bool lower_tail=true) {
 
