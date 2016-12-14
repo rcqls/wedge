@@ -1,6 +1,6 @@
 ## Wedge probability computation
 
-This `R` package is devoted to the computation of wedge probabilities. It includes two efficient functions using pure `R` vectorization and `Rcpp` interfacing `C++` code directly in the `R` system.
+This `R` package `wedge` is devoted to the computation of wedge probabilities. It includes two efficient functions using pure `R` vectorization and `Rcpp` (interfacing `C++` code directly in the `R` system).
 
 ### Installation
 
