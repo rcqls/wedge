@@ -10,6 +10,8 @@ Currently, the installation of the package is made using the `devtools` package:
 devtools::install_github("rcqls/wedge")
 ```
 
+For Windows and macOS users, it is also possible to provide the binaries to easily installation without compilation. Ask the authors if you are interested.
+
 ## Interested in faster computation of wedge probabilities?
 
 A companion `R` package [`wedgeParallel`](http://github.com/rcqls/wedgeParallel) is also available. It takes advantage of the multicore inside our modern computers. To install it, simply execute the following line in a terminal:
