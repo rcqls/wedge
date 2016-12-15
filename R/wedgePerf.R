@@ -14,7 +14,7 @@ wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParalle
     if("Rcpp" %in% tests) {
       # wedge probabilities, 3 term approximation
       cat("Rcpp with nb.exp=",nb.exp,"\n")
-      print(perfs[paste0("Rcpp-n=",nb.exp)] <- system.time(wpRcpp <- wedge(a1,b1,a2,b2,size,tau,N,type="Rcpp")))
+      print(perfs[[paste0("Rcpp-n",as.integer(nb.exp))]]<- system.time(wpRcpp <- wedge(a1,b1,a2,b2,size,tau,N,type="Rcpp")))
       if(summary.print) print(summary(wpRcpp))
     }
 
@@ -23,7 +23,7 @@ wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParalle
         for(nb.threads in nbs.threads) {
           RcppParallel::setThreadOptions(numThreads=nb.threads)
           cat("RcppParallel",nb.threads,"threads with nb.exp=",nb.exp,"\n")
-          print(perfs[paste0("RcppParallel-n",nb.exp,"-t",nb.threads)] <- system.time(wpRcppParallel<- wedge(a1,b1,a2,b2,size,tau,N,type="RcppParallel",nb.threads=nb.threads)))
+          print(perfs[[paste0("RcppParallel-n",as.integer(nb.exp),"-t",as.integer(nb.threads))]] <- system.time(wpRcppParallel<- wedge(a1,b1,a2,b2,size,tau,N,type="RcppParallel",nb.threads=nb.threads)))
           if(summary.print) print(summary(wpRcppParallel))
         }
       } else {
@@ -34,9 +34,10 @@ wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParalle
     if("R" %in% tests) {
       cat("Pure vectorized version with nb.exp=",nb.exp,"\n")
       if(nb.exp <= 10^7) {
-        print(perfs[paste0("R-n",nb.exp)] <- system.time(wpR <- wedgeR(a1,b1,a2,b2,size,tau,N)))
+        print(perfs[[paste0("R-n",as.integer(nb.exp))]] <- system.time(wpR <- wedgeR(a1,b1,a2,b2,size,tau,N)))
         if(summary.print) print(summary(wpR))
       } else cat("Boom! We think that is a bit dangerous for your computer!\n")
     }
   }
+  perfs
 }
