@@ -31,6 +31,10 @@ are returned; if \code{FALSE} the exit probabilities are returned.
 }
 }
 \details{
+Wedge probabilities are invariant through symmetry:
+\code{wedge(a1,b1,a2,b2)} returns the same as
+\code{wedge(b1,a1,b2,a2)} and
+\code{wedge(a2,b2,a1,b1)}.
 Depending on \code{N} a threshold is computed. If
 (\code{a1}+\code{a2})*(\code{b1}+\code{b2})/4 is above the threshold, \code{N}
 terms of Doob's formula are computed. If it is below the threshold, \code{N} terms
@@ -39,10 +43,10 @@ of the theta-function transform are computed.
 \value{a vector of wedge probabilities.
 }
 \references{
-B. Ycart (2016) Computing wedge probabilities. Arxiv #16??.????
+B. Ycart and R. Drouilhet (2016) Computing wedge probabilities. Arxiv #16??.????
 }
 \author{
-Bernard Ycart
+R\'emy Drouilhet and Bernard Ycart
 }
 \examples{
 # random wedges
@@ -56,7 +60,7 @@ summary(pw3)
 # wedge probabilities, 4 term approximation
 pw4 <- wedge(a1,b1,a2,b2,N=4)
 summary(abs(pw3-pw4))
-#  exit probabilities, 4 term approximation
+#  exit probabilities, 3 term approximation
 length(which(pw3==1))
 pw3m <- wedge(a1,b1,a2,b2,lower.tail=FALSE)
 summary(pw3+pw3m)

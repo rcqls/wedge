@@ -1,20 +1,21 @@
 # Wedge probability computation
 
-This `R` package `wedge` is devoted to the computation of wedge probabilities. It includes two efficient functions using pure `R` vectorization and `Rcpp` (interfacing `C++` code directly in the `R` system).
+This `R` package `wedge` is devoted to the computation of wedge probabilities. It includes two functions using pure `R` vectorization and `Rcpp` (interfacing `C++` code directly in the `R` system).
 
 ## Installation
 
-Currently, the installation of the package is made using the `devtools` package:
+Installation `wedge` using the `devtools` package:
 
 ```{bash}
 devtools::install_github("rcqls/wedge")
 ```
 
-For Windows and macOS users, it is also possible to provide the binaries to easily installation without compilation. Ask the authors if you are interested.
+Binaries for Windows and MacOS are available upon request
 
-## Interested in faster computation of wedge probabilities?
+## Interested in parallel computation?
 
-A companion `R` package [`wedgeParallel`](http://github.com/rcqls/wedgeParallel) is also available. It takes advantage of the multicore inside our modern computers. To install it, simply execute the following line in a terminal:
+A companion `R` package [`wedgeParallel`](http://github.com/rcqls/wedgeParallel) is also available. It takes full advantage of the multicore architecture of your computer.
+To install it, run the following line in a terminal:
 
 ```{bash}
 devtools::install_github("rcqls/wedgeParallel")

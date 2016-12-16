@@ -23,7 +23,7 @@ The DESCRIPTION file:
 Maintainer: \packageMaintainer{wedge}
 }
 \references{
-B. Ycart (2016) Computing wedge probabilities. Arxiv #16??.????
+B. Ycart and R. Drouilhet (2016) Computing wedge probabilities. Arxiv #16??.????
 }
 \keyword{distribution}
 \examples{

@@ -1,16 +1,17 @@
 Package: wedge
 Type: Package
-Title: Computing wedge probabilities efficiently using R and Rcpp
+Title: Computing wedge probabilities using R and Rcpp
 Version: 1.0
 Date: 2016-06-01
-Authors@R: c( person("Rémy","Drouilhet",role = c("ctb"), email = "remy.drouilhet@imag.fr"),
-              person("Bernard", "Ycart", role = c("aut", "cre"), email = "bernard.ycart@imag.fr")
+Authors@R: c( person("Rémy","Drouilhet",role = c("auth"), email = "remy.drouilhet@imag.fr"),
+              person("Bernard", "Ycart", role = c("ctb "cre"), email = "bernard.ycart@imag.fr")
             )
-Author: Remy Drouilhet [ctb],
-        Bernard Ycart [auth, cre]
-Maintainer: Bernard Ycart <bernard.ycart@imag.fr>
-BugReports: bernard.ycart@imag.fr
-Description: Computes the probability for a standard Brownian motion to stay in a wedge of the plane limited by two straight lines, given by their slopes and intercepts.
+Author: Remy Drouilhet [auth],
+        Bernard Ycart [ctb, cre]
+Maintainer: R\'emy Drouilhet <remy.drouilhet@imag.fr>
+BugReports: remy.drouilhet@imag.fr
+Description: Computes the probability for a standard Brownian motion to stay
+in a wedge of the plane limited by two straight lines, given by their slopes and intercepts.
 Depends: R (>= 3.0.0), Rcpp (>= 0.9.10)
 LazyData: true
 License: GPL

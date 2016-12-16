@@ -36,7 +36,7 @@ wedge.perf <- function(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParalle
       if(nb.exp <= 10^7) {
         print(perfs[[paste0("R-n",as.integer(nb.exp))]] <- system.time(wpR <- wedgeR(a1,b1,a2,b2,size,tau,N)))
         if(summary.print) print(summary(wpR))
-      } else cat("Boom! We think that is a bit dangerous for your computer!\n")
+      } else cat("Boom! We think this is too much for your computer!\n")
     }
   }
   perfs

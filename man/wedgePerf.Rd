@@ -2,39 +2,38 @@
 \alias{wedge.perf}
 \encoding{UTF-8}
 
-\title{Computes wedge probabilities
+\title{Performance of wedge probability computation
 }
 \description{
-Computes the probability for a standard Brownian motion to stay in a wedge
-of the plane limited by two straight lines, given by their slopes and intercepts.
+Returns running times for vectors of wedge probabilities under different implementations.
 }
 \usage{
 wedge.perf(nbs.exp=c(10^6,10^7,10^8),tests=c("R","Rcpp","RcppParallel"),seed=10,N=3,nbs.threads=c(4,6,8),summary.print=FALSE)
 }
 \arguments{
-  \item{nbs.exp}{vector of integer: numbers of wedge probabilities to compute
+  \item{nbs.exp}{vector of integer: numbers of wedge probabilities to be computed
 }
-  \item{tests}{vector of character: different functions to apply in the comparison
+  \item{tests}{vector of character: different implementations to be compared
 }
   \item{seed}{numeric: random seed to fix
 }
-  \item{N}{integer: number of terms to be computed in each series
+  \item{N}{integer: number of probabilities to be computed
 }
   \item{nbs.threads}{vector of integer: numbers of threads
 }
-  \item{summary.print}{logical: if \code{TRUE} the summary is printed to check the results.
+  \item{summary.print}{logical: if \code{TRUE} the summary of outputs is printed to check the results.
 }
 }
 \details{
-This function permits to compare the performance of the different functions computing the wedge probabilities.
+Compares the performance of different implementations for wedge probability computation.
 }
 \value{a list of system times.
 }
 \references{
-B. Ycart (2016) Computing wedge probabilities. Arxiv #16??.????
+B. Ycart and R. Drouilhet (2016) Computing wedge probabilities. Arxiv #16??.????
 }
 \author{
-Bernard Ycart
+R\'emy Drouilhet and Bernard Ycart
 }
 \examples{
 perfs <- wedge.perf()

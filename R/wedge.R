@@ -24,7 +24,7 @@ wedge <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE,type=c("R","Rcpp","Rc
         require(parallel)
         nb.threads <- detectCores()
       }
-      RcppParallel::setThreadOptions(numThreads=nb.threads) # To put in some options function
+      RcppParallel::setThreadOptions(numThreads=nb.threads) # depending on the option
       wedgeParallel:::wedgeRcppParallel(a1,b1,a2,b2,size,tau,N,lower.tail)
     },
     wedgeR(a1,b1,a2,b2,size,tau,N,lower.tail)
@@ -45,7 +45,7 @@ wedge.threshold <- function(N=3) {
 wedgeR <- function(a1,b1,a2,b2,size,tau,N=3,lower.tail=TRUE) {
   if(missing(size)) size <- min(length(a1),length(a2),length(b1),length(b2))
   if(missing(tau)) tau<- wedge.threshold(N)
-  #---------------------------------------------- conform the proper size
+  #---------------------------------------------- reduce to common size
   a1r <- a1[1:size]
   b1r <- b1[1:size]
   a2r <- a2[1:size]
