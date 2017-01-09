@@ -43,7 +43,7 @@ of the theta-function transform are computed.
 \value{a vector of wedge probabilities.
 }
 \references{
-B. Ycart and R. Drouilhet (2016) Computing wedge probabilities. Arxiv #16??.????
+B. Ycart and R. Drouilhet (2016) Computing wedge probabilities. arXiv:1612.05764
 }
 \author{
 R\'emy Drouilhet and Bernard Ycart

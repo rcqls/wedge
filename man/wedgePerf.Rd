@@ -30,7 +30,7 @@ Compares the performance of different implementations for wedge probability comp
 \value{a list of system times.
 }
 \references{
-B. Ycart and R. Drouilhet (2016) Computing wedge probabilities. Arxiv #16??.????
+B. Ycart and R. Drouilhet (2016) Computing wedge probabilities. arXiv:1612.05764
 }
 \author{
 R\'emy Drouilhet and Bernard Ycart
